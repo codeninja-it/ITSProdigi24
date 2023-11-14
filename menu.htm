@@ -1,13 +1,41 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="asset/miostile.css">
+		<style>
+			.menu-verticale > li > ul {
+				display: none;
+			}
+			
+			.menu-verticale > li:hover > ul {
+				display: block;
+				list-style-type: none;
+			}
+			
+			.menu-verticale > li:hover > ul > li {
+				border-bottom: 1px solid grey;
+				padding: .2em;
+			}
+			
+			.menu-verticale > li:hover > ul > li > a {
+				text-decoration: none;
+				color: black;
+			}
+		</style>
 	</head>
 	<body>
 		<ul class="menu-verticale">
-			<li><a href="pizze/margherita.htm" target="corpo">Margherita</a></li>
-			<li><a href="pizze/napoli.htm" target="corpo">Diavola</a></li>
-			<li><a href="pizze/napoli.htm" target="corpo">Quattro stagioni</a></li>
-			<li><a href="pizze/napoli.htm" target="corpo">Napoli</a></li>
+			<li><a href="home.htm" target="corpo">Home</a></li>
+			<li>
+				<a href="pizze.htm" target="corpo">Pizze</a>
+				<ul>
+					<li><a href="pizze/margherita.htm" target="corpo">Margherita</a></li>
+					<li><a href="pizze/napoli.htm" target="corpo">Napoli</a></li>
+					<li><a href="pizze/diavola.htm" target="corpo">Diavola</a></li>
+				</ul>
+			</li>
+			<li><a href="info.htm" target="corpo">Info</a></li>
+			<li><a href="contatti.htm" target="corpo">Contatti</a></li>
+			<li><a href="privacy.htm" target="corpo">Privacy</a></li>
 		</ul>
 	</body>
 </html>
