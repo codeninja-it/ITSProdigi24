@@ -1,0 +1,150 @@
+body {
+	font-family: Arial;
+	margin: 0;
+	padding: 0;
+	background-color: #f8f8f8;
+}
+
+h3 {
+	margin-top: 1em;
+}
+
+iframe {
+	border: 0;
+}
+
+.verde {
+	background-color: green;
+	color: white;
+}
+
+.grassetto {
+	font-weight: 900;
+}
+
+.menu-orizzontale {
+    position: absolute;
+    bottom: 0;
+	margin-bottom: 0;
+}
+
+.menu-orizzontale > li {
+	display: inline-block;
+	background-color: white;
+	border-top-right-radius: .5em;
+    border-top-left-radius: .5em;
+	margin-right: .5em;
+	padding: .2em;
+	padding-left: 1em;
+	padding-right: 1em;
+	font-weight: 200;
+}
+
+.menu-orizzontale > li > a {
+	text-decoration: none;
+	color: darkgreen;
+}
+
+.menu-orizzontale > li:hover > a {
+	color: lightgreen;
+}
+
+.menu-verticale {
+	margin-top: 2em;
+	list-style-type: none;
+	padding: 0;
+}
+
+.menu-verticale > li {
+	background-color: white;
+	padding: .5em;
+	border: 1px solid lightgreen;
+    box-shadow: 5px 5px 5px #00000082;
+    width: calc(100% - 3em);
+}
+
+.menu-verticale > li:first-child {
+	border-top-right-radius: .5em;
+}
+
+.menu-verticale > li:last-child {
+	border-bottom-right-radius: .5em;
+}
+
+.menu-verticale > li > a {
+	text-decoration: none;
+}
+
+chat {
+	display: block;
+	position: relative;
+}
+
+messaggio {
+	background-color: white;
+	display: inline-block;
+	position: relative;
+	width: calc(50% - 5em);
+	padding: 1em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+messaggio[autore="io"] {
+	float: right;
+}
+
+pizza {
+	display: inline-block;
+    width: 100px;
+    height: 120px;
+    background-color: white;
+    margin: 1em;
+    border-radius: .2em;
+    box-shadow: 2px 2px 2px #8080806b;
+    padding: .5em;
+	position: relative;
+	overflow: hidden;
+}
+
+pizza:hover {
+	transform: scale(1.1);
+	transition: .2s;
+}
+
+pizza > nome {
+	display: block;
+	position: absolute;
+	top: .2em;
+	left: .2em;
+	right: 0;
+	z-index: 9999;
+    background-color: #ffffff99;
+    padding: .2em;
+}
+
+pizza > prezzo {
+	display: block;
+	position: absolute;
+	bottom: .2em;
+	right: .2em;
+    background: #ffffffc2;
+    padding: .2em;
+    border-radius: .2em;
+}
+
+pizza > prezzo::before {
+	content: "€ ";
+}
+
+pizza > prezzo::after {
+	content: ".00";
+}
+
+pizza > img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}

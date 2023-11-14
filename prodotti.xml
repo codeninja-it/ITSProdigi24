@@ -1,0 +1,20 @@
+<prodotti>
+	<prodotto id="123412234">
+		<nome>surface</nome>
+		<marca>microsoft</marca>
+		<categoria>portatili</categoria>
+		<prezzo valuta="euro">600</prezzo>
+	</prodotto>
+	<prodotto id="123412235">
+		<nome>yoga</nome>
+		<marca>lenovo</marca>
+		<categoria>portatili</categoria>
+		<prezzo valuta="euro">600</prezzo>
+	</prodotto>
+	<prodotto id="123412236">
+		<nome>ibook</nome>
+		<marca>apple</marca>
+		<categoria>portatili</categoria>
+		<prezzo valuta="euro">6000</prezzo>
+	</prodotto>
+</prodotti>
