@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script>
+			
+			function addizione(a, b){
+				alert(a + b);
+				comando();
+			}
+			
+			function moltiplicazione(a, b){
+				alert(a * b);
+				comando();
+			}
+			
+			function divisione(a, b){
+				alert(a / b);
+				comando();
+			}
+			
+			function sottrazione(a, b){
+				alert(a - b);
+				comando();
+			}
+			
+			var ripetizioni = 0;
+			
+			function comando(){
+				var rimaniAcceso = confirm("hai eseguito per adesso " + 
+						ripetizioni + " operazioni, vuoi farne un'altra?");
+				if(rimaniAcceso){
+					ripetizioni = ripetizioni + 1;
+					var richiesta = prompt("cosa vuoi fare?");
+					var numero1 = prompt("qual'è il primo numero?");
+					var numero2 = prompt("qual'è il secondo numero?");
+					
+					numero1 = parseFloat(numero1);
+					numero2 = parseFloat(numero2);
+					
+					if(richiesta == "addizione"){
+						addizione(numero1, numero2);
+					} else if(richiesta == "moltiplicazione"){
+						moltiplicazione(numero1, numero2);
+					} else if(richiesta == "divisione"){
+						divisione(numero1, numero2);
+					} else {
+						sottrazione(numero1, numero2);
+					}
+				}
+			}
+			
+			
+			comando();
+			
+			
+		</script>
+	</body>
+</html>

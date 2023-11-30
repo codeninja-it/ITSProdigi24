@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script>
+			// alert("hai vinto!");
+			// prompt("dimmi la tua altezza");
+			
+			
+			
+			function calcolaBMI(){
+				var numAltezza = document.getElementById("altezza");
+				var numPeso = document.getElementById("peso");
+				var bmi = numPeso.value / (numAltezza.value * numAltezza.value);
+				var valutazione = document.getElementById("valutazione");
+				valutazione.innerText = bmi;
+			}
+		</script>
+	</head>
+	<body>
+		<h1>BMI</h1>
+		<p>Usa i campi qui sotto per calcolare il tuo BMI!</p>
+		<p>
+			<label for="peso">Dimmi il tuo peso</label>
+			<input id="peso" type="number" min=0 max=400 placeholder="in Kg...">
+		</p>
+		<p>
+			<label for="altezza">ed anche la tua altezza</label>
+			<input id="altezza" type="number" min=1 max=2.5 placeholder="in mt...">
+		</p>
+		<button onclick="calcolaBMI()">Calcola</button>
+		<p id="valutazione"></p>
+	</body>
+</html>

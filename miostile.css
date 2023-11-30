@@ -1,0 +1,34 @@
+body {
+	background-color: #efefef;
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Arial;
+}
+
+h1 {
+	color: #555555;
+	background-color: #d4ffe1;
+	padding: 0;
+	margin: 0;
+	padding-left: .5em;
+	padding-bottom: .5em;
+	box-shadow: 0 5px 5px #00000055;
+}
+
+ul {
+	padding: .2em;
+}
+
+li {
+	background-color: grey;
+	margin: .2em;
+	color: white;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	padding: .2em;
+}
+
+li:hover {
+	box-shadow: 5px 5px 5px black;
+}

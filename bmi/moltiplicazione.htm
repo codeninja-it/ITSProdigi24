@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<script>
+		
+			// funzione di esecuzione moltiplicazione
+			// prende due parametri in ingresso
+			// e ne restituisce un risultato testuale
+			function operazione(numero1, numero2){
+				var risultato = numero1 * numero2;
+				return "<operazione>" + numero1 + " X " + numero2 + " = " + risultato + "</operazione>";
+			}
+			
+			// funzione principale che innesca la stampa della tabellina
+			function tabellina(){
+				var base = document.getElementById("base");
+				var lavagna = document.getElementById("lavagna");
+				lavagna.innerHTML = operazione(base.value, 1);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 2);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 3);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 4);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 5);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 6);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 7);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 8);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 9);
+				lavagna.innerHTML = lavagna.innerHTML + operazione(base.value, 10);
+			}
+		</script>
+	</head>
+	<body>
+		<input id="base" type="number">
+		<button onclick="tabellina()">calcola</button>
+		<p id="lavagna"></p>
+	</body>
+</html>

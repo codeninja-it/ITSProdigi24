@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<script>
+
+			function moltiplicazione(a, b){
+				var risultato = a * b;
+				var destinazione = document.getElementById("target");
+				destinazione.innerHTML +=
+											"<li>" +
+											a +
+											" x " +
+											b +
+											" = " +
+											risultato +
+											"</li>";
+				comando();
+			}
+			
+			var base = 2;
+			var ripetizioni = 0;
+			var finoA = 1000;
+			
+			function comando(){
+				if(ripetizioni < finoA){
+					ripetizioni = ripetizioni + 1;
+					
+					moltiplicazione(base, ripetizioni);
+				}
+			}
+			
+			function setup(){
+				base = document.getElementById("base").value;
+				ripetizioni = 0;
+				document.getElementById("target").innerHTML = "";
+				comando();
+			}
+			
+			
+		</script>
+		<input type="number" id="base" value=2>
+		<button onclick="setup()">inizia</button>
+		<ul id="target"></ul>
+	</body>
+</html>

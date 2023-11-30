@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1>La tua piscina!</h1>
+		<p>Per riempire la tua piscina larga <span id="diam"></span> mt 
+		e profonda <span id="deep"></span> mt avrai bisogno 
+		di <span id="vol"></span> mt<sup>3</sup> (<span id="lt"></span> lt) di acqua!</p>
+		
+		<script>
+			// recupero i dati
+			var diametro = prompt("che diametro ha in metri?");
+			var raggio = diametro / 2;
+			var profondità = prompt("quanto è profonda in metri?");
+			
+			// calcolo dei nuovi dati
+			var volume = (3.141 * (raggio * raggio)) * profondità;
+			
+			// presentazione
+			var spanDiam = document.getElementById("diam");
+			var spanDeep = document.getElementById("deep");
+			var spanVol = document.getElementById("vol");
+			var spanLt = document.getElementById("lt");
+			
+			spanDiam.innerText = diametro;
+			spanDeep.innerText = profondità;
+			spanVol.innerText = volume;
+			spanLt.innerText = volume * 1000;
+			
+		</script>
+	</body>
+</html>
