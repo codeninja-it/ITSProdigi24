@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script>
+			
+			function cifra(posizione, addiziona){
+				// recupero il testo da cifrare
+				var txtTesto = document.getElementById("testo");
+				var daTradurre = txtTesto.value;
+				// recupero il campo dove farlo finire
+				var txtSegreto = document.getElementById("segreto");
+				
+				// se somo entro la lunghezza della frase
+				if(posizione < daTradurre.length){
+					// recupero il numero di passi
+					var txtPassword = document.getElementById("password");
+					var passi = parseInt( txtPassword.value );
+					
+					// estraggo la lettera n
+					var daCambiare = daTradurre.charCodeAt(posizione); // c -> 99
+					if(daCambiare >= 97 && daCambiare <= 122){
+						var assoluto = daCambiare - 97;
+						var nuovoValore;
+						if(addiziona)
+							nuovoValore = assoluto + passi; // 99 + 1
+						else
+							nuovoValore = assoluto - passi; // 100 - 1
+						if(nuovoValore < 0){
+							nuovoValore = (26 + nuovoValore) + 97;
+						} else {
+							nuovoValore = (nuovoValore % 26) + 97;
+						}
+						var nuovoCarattere = String.fromCharCode(nuovoValore); // 100 -> d
+						
+						// lo comunico all'utente tramite una voce in console
+						txtSegreto.value += nuovoCarattere; 
+						// riprova a cifrare alla posizione successiva
+					} else {
+						txtSegreto.value += String.fromCharCode(daCambiare);
+					}
+					cifra(posizione + 1, addiziona);
+				} else {
+					console.log("testo finito");
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<h1>il mio primo cifrario!</h1>
+		<p>
+			<label for="testo">Testo in chiaro</label>
+			<input id="testo" value="casa">
+		</p>
+		<p>
+			<button onclick="cifra(0, true);">cifra</button>
+			<button onclick="cifra(0, false);">decifra</button>
+			<input type="number" id="password" value="1">
+		</p>
+		<p>
+			<label for="segreto">Testo cifrato</label>
+			<input id="segreto">
+		</p>
+	</body>
+</html>
