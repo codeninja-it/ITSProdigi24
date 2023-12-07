@@ -1,0 +1,165 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<style>
+		
+			body {
+				font-family: cursive;
+				background-color: #aed9ae;
+			}
+			
+			h1 {
+				background-color: #008000b8;
+				padding: 1em;
+			}
+		
+			table {
+				padding: 1em;
+			}
+			
+			td {
+				width: 100px;
+				height: 100px;
+				background-color: #00BCD4;
+				border: 1px solid #9ecb6b;
+				box-shadow: inset 2px 2px 2px #808080a3;
+				margin: 25px;
+				border-radius: 50px;
+				text-align: center;
+			    font-size: xx-large;
+			}
+			
+			#pulsantiera {
+			    text-align: center;
+				background-color: #9ccf4e;
+				margin: 1em;
+				padding: 1em;
+				box-shadow: 5px 5px 5px #0e4b11;
+			    border-radius: 1em;
+			}
+			
+			#pulsantiera > button {
+				background-color: goldenrod;
+				border: none;
+				padding: 1em;
+				border-radius: 1em;
+				box-shadow: 2px 2px 2px #80808069;
+				cursor: pointer;
+			}
+		</style>
+		
+		<script>
+		
+			var regole = [
+							0, -1, 2, 0,
+							0, -2, 0, -1,
+							2, -3, 0, 1,
+							0, -3, -10, 0
+						];
+						
+			var posizioni = [0, 0, 0];
+			var pedine = ["&#129414;", "&#128023;", "&#129411;"];
+			
+			function aggiornaCella(numero){
+				var cella = document.getElementById("cella" + numero);
+				cella.innerHTML = "";
+				if(posizioni[0] == numero)
+					cella.innerHTML += pedine[0];
+				if(posizioni[1] == numero)
+					cella.innerHTML += pedine[1];
+				if(posizioni[2] == numero)
+					cella.innerHTML += pedine[2];
+			}
+			
+			function aggiornaTutto(numero){
+				aggiornaCella(numero);
+				var successiva = numero + 1;
+				if(successiva < regole.length)
+					aggiornaTutto(successiva);
+			}
+			
+			
+			
+			function refresh(posizione){
+				if(posizione < regole.length){
+					refresh(posizione + 1);
+					var cella = document.getElementById("cella" + posizione);
+					cella.innerHTML = statoCella(posizione, 0, "");
+				}
+			}
+			
+			function statoCella(cella, utente, testo){
+				if(utente < pedine.length){
+					testo = statoCella(cella, utente + 1, testo);
+					if (posizioni[utente] == cella){
+						testo += " " + pedine[utente];
+					}
+				}
+				return testo;
+			}
+			
+			function tiraD6(){
+				var acaso = Math.random();
+				acaso = acaso * 6;
+				acaso = acaso + 1;
+				acaso = Math.trunc(acaso);
+				return acaso;
+			}
+			
+			function turno(chi){
+				// connetto la cella attuale
+				var numeroCella = posizioni[chi];
+				// tiro il mio D6
+				var lancio = tiraD6();
+				// sposto la posizione dell'utente
+				numeroCella = numeroCella + lancio;
+				if(numeroCella < regole.length){
+					// controllo se ha penalità
+					numeroCella = numeroCella + regole[numeroCella];
+					posizioni[chi] = numeroCella;
+				} else {
+					alert("Ha vinto l'utente " + (chi + 1) + "!");
+					posizioni = [0, 0, 0];
+				}
+				refresh(0);
+			}
+		
+		</script>
+	</head>
+	<body>
+		<h1>Il gioco dell'Ocio!</h1>
+		<p>usa i pulsanti qui accanto per vincere ricchi premi!</p>
+		<table>
+			<tr>
+				<td id="cella0">&#129414; &#128023; &#129411;</td>
+				<td id="cella1"></td>
+				<td id="cella2"></td>
+				<td id="cella3"></td>
+			</tr>
+			<tr>
+				<td id="cella4"></td>
+				<td id="cella5"></td>
+				<td id="cella6"></td>
+				<td id="cella7"></td>
+			</tr>
+			<tr>
+				<td id="cella8"></td>
+				<td id="cella9"></td>
+				<td id="cella10"></td>
+				<td id="cella11"></td>
+			</tr>
+			<tr>
+				<td id="cella12"></td>
+				<td id="cella13"></td>
+				<td id="cella14"></td>
+				<td id="cella15"></td>
+			</tr>
+		</table>
+		<div id="pulsantiera">
+			<button onclick="turno(0);">Tira utente 1</button>
+			<button onclick="turno(1);">Tira utente 2</button>
+			<button onclick="turno(2);">Tira utente 3</button>
+		</div>
+	</body>
+</html>
