@@ -1,0 +1,118 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<style>
+			body {
+				background-color: lightgreen;
+				font-family: monospace;
+				padding: 0;
+				margin: 0;
+			}
+			
+			h1 {
+				background-color: white;
+				padding: 1em;
+			}
+		
+			table {
+				margin-left: auto;
+				margin-right: auto;
+			}
+		
+			td {
+				width: 25px;
+				height: 25px;
+				background-color: #efefef;
+				box-shadow: 5px 5px 5px #0000006e;
+				text-align: center;
+			}
+			
+			div {
+				text-align: center;
+			}
+		</style>
+		<script>
+			var labirinto = [];
+							
+			function cambia(y, x){
+				var attuale = labirinto[y][x];
+				labirinto[y][x] = !attuale;
+				var elemento = document.getElementById("C" + y + "_" + x);
+				if(labirinto[y][x] == true){
+					//elemento.style.backgroundColor = "white";
+					elemento.innerHTML = "&nbsp;";
+				} else {
+					//elemento.style.backgroundColor = "red";
+					elemento.innerHTML = "&#129521;";
+				}
+			}
+			
+			function setupLabirinto(quale, righe, colonne){
+				var destinazione = document.getElementById(quale);
+				labirinto = [];
+				destinazione.innerHTML = "";
+				
+				var y = 0;
+				
+				while(y < righe){
+					// istruzioni per costruire una riga
+					var nuovaRiga = [];
+					var rigaGrafica = "<tr>";
+					var x = 0;
+					while(x < colonne){
+						nuovaRiga.push(true);
+						rigaGrafica += "<td id='C" + 
+										y + "_" + x + 
+										"' onclick='cambia(" + 
+										y + 
+										", " + 
+										x + 
+										");'>&nbsp;</td>";
+						x++;
+					}
+					rigaGrafica += "</tr>";
+					destinazione.innerHTML += rigaGrafica;
+					labirinto.push(nuovaRiga);
+					y++;
+				}
+			}
+			
+			// deve scansionare l'array fino a 
+			// che non arriva a destinazione
+			function risolvi(pY, pX, fY, fX, percorse){
+				//console.log(percorse);
+				var maxY = labirinto.length;
+				var maxX = labirinto[0].length;
+				var cella = "[" + pY + "," + pX + "]";
+				if(pX >= 0 && pX < maxX){
+					if(pY >= 0 && pY < maxY){
+						if(labirinto[pY][pX] == true){
+							if(percorse.indexOf(cella) == -1){
+								if(pY == fY && pX == fX){
+									console.log("Vittoria: " + percorse);
+								} else {
+									percorse += cella;
+									risolvi(pY-1, pX, fY, fX, percorse);
+									risolvi(pY, pX+1, fY, fX, percorse);
+									risolvi(pY+1, pX, fY, fX, percorse);
+									risolvi(pY, pX-1, fY, fX, percorse);
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		</script>
+	</head>
+	<body>
+		<h1>Labirinto</h1>
+		<p>Clicca sulle celle per decidere se l'utente può passare su quella cella oppure no!</p>
+		<table id="target"></table>
+		<div>
+			<button onclick="setupLabirinto('target', 10, 10)">crea 10x10</button>
+			<button onclick="risolvi(0, 0, 9, 9, '')">risolvi</button>
+		</div>
+	</body>
+</html>
