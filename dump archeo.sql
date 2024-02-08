@@ -100,13 +100,22 @@ create table reperti (
     idOrigine int,
     idSito int,
     idTipo int,
-    idComune int
+    idComune int,
+    x real,
+    y real
 );
 
-insert into reperti (descrizione, idOrigine, idSito, idTipo, idComune)
-select punti.Descrizione, origini.idOrigine, siti.idSito, tipi.idTipo, comuni.idComune
+insert into reperti (descrizione, idOrigine, idSito, idTipo, idComune, x, y)
+select punti.Descrizione, origini.idOrigine, siti.idSito, tipi.idTipo, comuni.idComune, replace(punti.x, ",", "."), replace(punti.y, ",", ".")
 from punti
 left join comuni on punti.Citta=comuni.comune
 left join siti on punti.sito=siti.sito
 left join origini on punti.Origine=origini.origine
 left join tipi on punti.Tipo=tipi.tipo;
+
+select count(reperti.idreperto) as quanti, provincia, min(x) as l, max(x) as r, min(y) as b, max(y) as t
+from reperti
+left join comuni on reperti.idcomune=comuni.idcomune
+left join province on comuni.idprovincia=province.idprovincia
+group by province.idProvincia
+order by count(reperti.idreperto) desc
