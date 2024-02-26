@@ -2,9 +2,30 @@
 	<head>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" href="asset/stile.css" />
+		<script src="asset/riga.js"></script>
+		<script src="asset/categoria.js"></script>
+		<script src="asset/prodotto.js"></script>
+		<script src="asset/tabella.js"></script>
 		<script src="asset/bancadati.js"></script>
 	</head>
 	<body>
 		<button id="btnStart">inizia</button>
+		<div id="target"></div>
+		<script>
+			var tabella = new Tabella("Prodotti");
+			tabella.Add(new Prodotto(1, "XBOX", 300))
+			.Add(new Prodotto(2, "Switch", 255))
+			.Add(new Prodotto(3, "Play Station 5", 500))
+			.Add(new Prodotto(4, "Tostapane", 25));
+		
+		
+			var pulsante = document.getElementById("btnStart");
+			pulsante.addEventListener("click", cliccato);
+			
+			function cliccato(){
+				var target = document.getElementById("target");
+				target.innerHTML = "<table>" + tabella.ToString() + "</table>";
+			}
+		</script>
 	</body>
 </html>
