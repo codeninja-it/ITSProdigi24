@@ -1,8 +1,8 @@
 class Categoria extends Riga {
 	
-	constructor(id, categoria){
+	constructor(idCategoria, categoria){
 		super();
-		this.id = id;
+		this.idCategoria = idCategoria;
 		this.categoria = categoria;
 	}
 	

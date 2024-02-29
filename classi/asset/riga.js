@@ -1,7 +1,12 @@
 class Riga {
 	
-	ToString(campi){ // ["id", "codice", "prezzo"]
-		var buffer = "<tr>";
+	ToString(campi, evidenza){ // ["id", "codice", "prezzo"], "return x.categoria=='videogame'"
+		var fxEvidenza = new Function("x", evidenza);
+		if(fxEvidenza(this)){
+			var buffer = "<tr class='evidenza'>";
+		} else {
+			var buffer = "<tr>";
+		}
 		var attributi = Object.keys(this);
 		var valori = Object.values(this);
 		for(var i=0; i < attributi.length; i++){

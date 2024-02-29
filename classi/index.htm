@@ -6,26 +6,39 @@
 		<script src="asset/categoria.js"></script>
 		<script src="asset/prodotto.js"></script>
 		<script src="asset/tabella.js"></script>
-		<script src="asset/bancadati.js"></script>
 	</head>
 	<body>
-		<button id="btnStart">inizia</button>
+		<p>
+			<button id="btnStart">cerca</button>
+			<input id="txtCodice" placeholder="codice...">
+		</p>
 		<div id="target"></div>
 		<script>
 			var tabella = new Tabella("Prodotti");
-			tabella.Add(new Prodotto(1, "XBOX", 300))
-			.Add(new Prodotto(2, "Switch", 255))
-			.Add(new Prodotto(3, "Play Station 5", 500))
-			.Add(new Prodotto(4, "Tostapane", 25));
-		
+			tabella.Add(new Prodotto(1, 2, "XBOX", 300, 300))
+					.Add(new Prodotto(2, 2, "Switch", 255, 255))
+					.Add(new Prodotto(3, 2, "Play Station 5", 500, 450))
+					.Add(new Prodotto(4, 3, "Tostapane", 25, 20));
 		
 			var pulsante = document.getElementById("btnStart");
+			var testo = document.getElementById("txtCodice");
 			pulsante.addEventListener("click", cliccato);
 			
 			function cliccato(){
 				var target = document.getElementById("target");
-				target.innerHTML = "<table>" + tabella.ToString() + "</table>";
+				target.innerHTML = tabella.Where("return x.codice.toLowerCase().indexOf('" + testo.value + "') > -1;").ToString(null, "return x.prezzo > 300");
+				target.innerHTML += categorie.ToString(null, "return x.categoria == 'Consoles';");
+				target.innerHTML += categorie
+										.Join(tabella, "return sx.idCategoria == dx.idCategoria;")
+										.ToString(null, "return false;");
 			}
+			
+			var categorie = new Tabella("Categorie");
+			categorie.Add(new Categoria(1, "Vedeogames"))
+						.Add(new Categoria(2, "Consoles"))
+						.Add(new Categoria(3, "Elettrodomestici"));
+			
+			
 		</script>
 	</body>
 </html>
