@@ -18,8 +18,12 @@
 			$libro["sottotitolo"] = str_replace("\"", "", $trovato["sottotitolo"]);
 			$libro["prezzo"] = intval($trovato["prezzo"]) / 100;
 			$libro["pagine"] = intval($trovato["pagine"]);
-			$libro["base"] = intval($trovato["base"]);
-			$libro["altezza"] = intval($trovato["altezza"]);
+			$libro["x"] = intval($trovato["base"]);
+			$libro["y"] = intval($trovato["altezza"]);
+			$libro["z"] = intval($trovato["pagine"]* 0.1);
+			$libro["mm3"] = intval($libro["x"] * $libro["y"] * $libro["z"]);
+			$libro["gr"] = intval($libro["x"] * $libro["y"] * 0.00008 * $libro["pagine"]);
+			
 			$libro["anno"] = intval($trovato["anno"]);
 			$libro["idAutori"] = [];
 		
