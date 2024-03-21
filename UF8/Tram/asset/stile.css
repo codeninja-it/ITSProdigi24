@@ -1,0 +1,61 @@
+html, body {
+	padding: 0;
+	margin: 0;
+	background-color: #cccccc;
+	font-family: Verdana;
+}
+
+h1 {
+	background-color: white;
+}
+
+h1, p, form {
+	padding: .5em;
+}
+
+p {
+	margin-top: 0;
+}
+
+input, button {
+	width: 100%;
+}
+
+ul {
+	list-style-type: none;
+	padding-inline-start: 0;
+}
+
+li {
+	background-color: white;
+    margin: .5em;
+    padding: .5em;
+    position: relative;
+    box-shadow: 5px 5px 5px #00000055;
+    width: calc((100% / 3) - 2em);
+    display: inline-block;
+    min-width: 250px;
+}
+
+li > a {
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-decoration: none;
+}
+
+li > p {
+	font-size: small;
+}
+
+li > p::first-line {
+	font-weight: bold;
+	font-size: initial;
+}
+
+form {
+	background-color: white;
+    margin: 1em;
+    padding: 1em;
+    box-shadow: 5px 5px 5px #00000055;
+}
