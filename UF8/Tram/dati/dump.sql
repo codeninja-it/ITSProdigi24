@@ -11,24 +11,25 @@ insert into autisti (nome, cognome) values
 
 create table strade (
     idstrada integer primary key autoincrement,
-    strada text
+    strada text,
+    lunghezza int
 );
 
 delete from strade;
-insert into strade (strada) values
-("tagenziale nord"),
-("via garibaldi"),
-("via mazzini"),
-("corso italia"),
-("via verdi"),
-("via rossi"),
-("tangenziale sud"),
-("tangenziale ovest"),
-("via napoleone"),
-("via libertà"),
-("viale dei caduti"),
-("corso indipendenza"),
-("tangenziale est");
+insert into strade (strada, lunghezza) values
+("tagenziale nord", 6),
+("via garibaldi", 4),
+("via mazzini", 2),
+("corso italia", 6),
+("via verdi", 2),
+("via rossi", 4),
+("tangenziale sud", 6),
+("tangenziale ovest", 6),
+("via napoleone", 4),
+("via libertà", 2),
+("viale dei caduti", 2),
+("corso indipendenza", 4),
+("tangenziale est", 6);
 
 create table pensiline (
     idpensilina integer primary key autoincrement,
