@@ -14,9 +14,7 @@
 				case "cancella":
 						// ?azione=cancella&id=10000
 						Cancella("linee", "idlinea", $_GET["id"]);
-						echo "<div class='alert alert-success'>
-									Linea cancellata con successo!
-								</div>";
+						Messaggio("Linea cancellata con successo!", "?azione=lista");
 				break;
 					
 				case "inserisci":
@@ -35,13 +33,32 @@
 						// istante 2: so cosa vuole inserire e lo inserisco
 						EseguiDB("INSERT INTO linee (linea) 
 									VALUES ('".addslashes($_POST["nome"])."')");
-						echo "<div class='alert alert-success'>
-									Linea inserita con successo!
-								</div>";
+						Messaggio("Linea inserita con successo!", "?azione=lista");
 					}
 				break;
 				
 				case "modifica":
+					if(empty($_POST)){
+						// linee.php?azione=modifica&id=3
+						// istante 1: l'utente vuole inserire ma non mi ha detto cosa
+						$dati = EseguiDB("SELECT * FROM linee WHERE idlinea=".intval($_GET["id"]));
+						$riga = $dati->fetchArray();
+						?>
+						<form method="post">
+							<p class="form-group">
+								<label for="linea">Nome della linea</label>
+								<input id="linea" name="nome" value="<?php echo addslashes($riga["linea"]); ?>" class="form-control" />
+							</p>
+							<button class="btn btn-primary">salva</button>
+						</form>
+						<?php
+					} else {
+						// istante 2: so cosa vuole inserire e lo inserisco
+						EseguiDB("UPDATE linee 
+									SET linea='".addslashes($_POST["nome"])."'
+									WHERE idlinea=".intval($_GET["id"]));
+						Messaggio("Linea modificata con successo!", "?azione=lista");
+					}
 					break;
 				
 				default:
@@ -60,6 +77,7 @@
 								echo "<th>Linea</th>";
 								echo "<th>Inizio</th>";
 								echo "<th>Fine</th>";
+								echo "<th></th>";
 								echo "<th>
 											<a href='?azione=inserisci' class='btn btn-success'>
 												<span class='material-symbols-outlined'>add</span>
@@ -74,6 +92,11 @@
 									echo "<td>".$riga["linea"]."</td>";
 									echo "<td>".$riga["dalle"]."</td>";
 									echo "<td>".$riga["alle"]."</td>";
+									echo "<td>
+											<a href='?azione=modifica&id=".$riga["idlinea"]."' class='btn btn-warning'>
+												<span class='material-symbols-outlined'>edit</span>
+											</a>
+										</td>";
 									echo "<td>
 											<a href='?azione=cancella&id=".$riga["idlinea"]."' class='btn btn-danger'>
 												<span class='material-symbols-outlined'>delete</span>

@@ -139,3 +139,16 @@ delete from turni;
 insert into turni (idautista, idlinea, idmezzo, giorno) values
 (1, 1, 1, "2024-03-21"),
 (2, 3, 2, "2024-03-21");
+
+create table utenti(
+	idutente integer primary key autoincrement,
+	nome text,
+	amministratore bool,
+	email text,
+	pass text
+);
+
+delete from utenti;
+insert into utenti (nome, amministratore, email, pass) values
+("Filippo", true, "filippo@gestionetram.it", "1234"),
+("Piergiorgio", false, "piero@gestionetram.it", "3456");
