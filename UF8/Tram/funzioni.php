@@ -84,8 +84,12 @@
 		EseguiDB("UPDATE ".$tabella." SET ".$condizioni." WHERE ".$chiavePrimaria."=".$id, true);
 	}
 	
-	function ApriForm($metodo = "post", $azione = '?'){
-		echo "<form method='".$metodo."' action='".$azione."'>";
+	function ApriForm($azione = null, $metodo = "post"){
+		if($azione == null){
+			echo "<form method='".$metodo."'>";
+		} else {
+			echo "<form action='".$azione."' method='".$metodo."'>";
+		}
 	}
 	
 	function ChiudiForm($salva = "Salva", $annulla = "Annulla"){
@@ -98,9 +102,58 @@
 	// ScriviCampo("nome", "Nome utente");
 	// ScriviCampo("nome", "Nome utente", $riga["nome"]);
 	function ScriviCampo($id, $label, $valore = "", $tipo = "text", $classe = "form-control"){
-		echo "
-			<p class='form-group'>
-				<label for='".$id."'>".$label."</label>
-				<input value='".$valore."' type='".$tipo."' id='".$id."' name='".$id."' class='".$classe."' />
-			</p>";
+		switch($tipo){
+			case "checkbox":
+				echo "<p class='form-check form-switch'>
+							<label class='form-check-label' for='".$id."'>".$label."</label>
+							<input type='checkbox' value='si' id='".$id."' name='".$id."' class='form-check-input' ".($valore ? "checked" : "")." /> 
+						</p>";
+			break;
+			default:
+				echo "<p class='form-group'>
+							<label for='".$id."'>".$label."</label>
+							<input value='".$valore."' type='".$tipo."' id='".$id."' name='".$id."' class='".$classe."' />
+						</p>";
+			break;
+		}
+		
+	}
+	
+	function DisegnaTabella($sql, $chiave){
+		$dati = EseguiDB($sql);
+		$righe = [];
+
+		while($riga = $dati->fetchArray(SQLITE3_ASSOC)){
+			$nuova = [];
+				$nuova[] = "<tr>";
+					foreach($riga as $campo => $valore){
+						$nuova[] = "<td align='".(is_numeric($valore) ? "right" : "left")."'>
+										".$valore."
+									</td>";
+					}
+					$nuova[] = "<td><a href='?azione=modifica&id=".$riga[$chiave]."' class='btn btn-warning material-symbols-outlined'>edit</a></td>";
+					$nuova[] = "<td><a href='?azione=cancella&id=".$riga[$chiave]."' class='btn btn-danger material-symbols-outlined'>delete</a></td>";
+				$nuova[] = "</tr>";
+			$righe[] = implode("", $nuova);
+		}
+		$dati->reset();
+		$riga = $dati->fetchArray(SQLITE3_ASSOC);
+		$colonne = [];
+			foreach($riga as $campo => $valore){
+				$colonne[] = "<th align='".(is_numeric($valore) ? "right" : "left")."'>
+								".$campo."
+							</th>";
+			}
+			$colonne[] = "<th width='1%'><a href='?azione=inserisci' class='btn btn-success material-symbols-outlined'>add</a></th>";
+			$colonne[] = "<th width='1%'></th>";
+		echo "<table class='table table-hover'>
+				<thead><tr>".implode("", $colonne)."</tr></thead>
+				<tbody>".implode("", $righe)."</tbody>
+			</table>";
+	}
+	
+	function DammiColonne($tabella){
+		$dati = EseguiDB("SELECT name, type, dflt_value, pk 
+							FROM PRAGMA_TABLE_INFO('".$tabella."');");
+		return $dati;
 	}
