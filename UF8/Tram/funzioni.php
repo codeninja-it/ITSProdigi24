@@ -119,6 +119,32 @@
 		
 	}
 	
+	function ScriviTendina($id, $label, $chiave, $descrizione, $tabella, $valore = 0){
+		$dati = EseguiDB("SELECT ".$chiave.", ".$descrizione." 
+							FROM ".$tabella." 
+							ORDER BY ".$descrizione.";");
+		$opzioni = [];
+		while($riga = $dati->fetchArray()){
+			if($riga[$chiave] == $valore){
+				$opzioni[] = "<option selected value=".$riga[$chiave].">
+								".$riga[$descrizione]."
+								</option>";
+			} else {
+				$opzioni[] = "<option value=".$riga[$chiave].">
+								".$riga[$descrizione]."
+								</option>";
+			}
+		}
+		$opzioni = implode("", $opzioni);
+		
+		echo "<p class='form-group'>
+					<label for='".$id."'>".$label."</label>
+					<select class='form-select' id='".$id."' name='".$id."'>
+						".$opzioni."
+					</select>
+				</p>";
+	}
+	
 	function DisegnaTabella($sql, $chiave){
 		$dati = EseguiDB($sql);
 		$righe = [];
@@ -140,7 +166,7 @@
 		$riga = $dati->fetchArray(SQLITE3_ASSOC);
 		$colonne = [];
 			foreach($riga as $campo => $valore){
-				$colonne[] = "<th align='".(is_numeric($valore) ? "right" : "left")."'>
+				$colonne[] = "<th ".(is_numeric($valore) ? "class='text-end' width='1%'" : "").">
 								".$campo."
 							</th>";
 			}
