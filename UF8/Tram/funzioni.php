@@ -1,5 +1,5 @@
 <?php
-	define("NOMEDB", "dati/tram.sqlite");
+	define("NOMEDB", "../dati/tram.sqlite");
 	define("DEBUG", true);
 	
 	if(!DEBUG){
@@ -67,7 +67,7 @@
 		}
 		$valori = implode(", ", $valori);
 		
-		EseguiDB("INSERT INTO ".$tabella." (".$campi.") VALUES (".$valori.");", true);
+		EseguiDB("INSERT INTO ".$tabella." (".$chiavi.") VALUES (".$valori.");", true);
 	}
 	
 	function ModificaDB($tabella, $campi, $chiavePrimaria, $id){

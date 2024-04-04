@@ -1,6 +1,6 @@
 				</div>
 				<div class="col-md-4">
-					<?php include("parti/menu.php"); ?>
+					<?php include("../parti/menu.php"); ?>
 				</div>
 			</div>
 		</div>

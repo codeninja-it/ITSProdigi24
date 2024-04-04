@@ -152,3 +152,32 @@ delete from utenti;
 insert into utenti (nome, amministratore, email, pass) values
 ("Filippo", true, "filippo@gestionetram.it", "1234"),
 ("Piergiorgio", false, "piero@gestionetram.it", "3456");
+
+CREATE TABLE modelli (
+    idmodello integer primary key autoincrement,
+    modello text
+);
+
+INSERT INTO modelli (modello)
+SELECT modello
+FROM mezzi
+GROUP BY modello;
+
+ALTER TABLE mezzi ADD COLUMN idmodello int;
+UPDATE mezzi
+SET idmodello=(SELECT modelli.idmodello 
+                FROM modelli
+                WHERE mezzi.modello=modelli.modello);
+ALTER TABLE mezzi DROP COLUMN modello;
+
+CREATE VIEW listaAutisti AS
+SELECT idautista, (nome || " " || cognome) AS nomeCompleto
+FROM autisti
+ORDER BY nome;
+
+DROP VIEW listaAutisti;
+
+CREATE VIEW listaAutisti AS
+SELECT idautista, (cognome || " " || nome) AS nomeCompleto
+FROM autisti
+ORDER BY cognome;
