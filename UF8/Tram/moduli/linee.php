@@ -1,6 +1,14 @@
-<?php include("../parti/head.php"); ?>
+<?php 
+	session_start();
+	
+	if(empty($_SESSION["utente"])){
+		header("Location: ../index.php");
+		die();
+	}
+	
+	include("../parti/head.php"); ?>
 	<h1>Gestione Linee</h1>
-	<p>Usa questa pagina per gestire le linee cittadine 
+	<p><?php echo $_SESSION["utente"]["nome"]; ?>, usa questa pagina per gestire le linee cittadine 
 		cliccando sulla linea che ti interessa o utilizzando 
 		i pulsanti in pagina</p>
 

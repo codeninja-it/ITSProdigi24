@@ -23,7 +23,7 @@
 	function EseguiDB($sql, $salva = false){
 		// sistema master-slave
 		if($salva){
-			file_put_contents("dati/slave.sql", $sql."\n", FILE_APPEND);
+			file_put_contents("../dati/slave.sql", $sql."\n", FILE_APPEND);
 		}
 		
 		// connettersi al db
